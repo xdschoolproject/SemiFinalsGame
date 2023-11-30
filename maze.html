@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAZE</title>
+    <link rel="stylesheet" href="MazeStyle.css">
+</head>
+
+
+<body onload = "createmaze()">
+    <h1>MAZE GAME</h1>
+    
+    
+
+    <div id="maze-container">
+        <img src="turtle.png" id="turtle" width="50px" height="50px" alt="turtle">
+        <img src="redflag.png" id="redflag" width="50px" height="50px" alt="redflag">
+    </div>
+
+    <script>
+        let gamestart = [
+            [1,0,1],
+            [1,0,1],
+            [1,1,1]
+        ]
+
+        let MazeArray = gamestart;
+
+        let maze = document.getElementById("maze-container");
+
+        let turtle = document.getElementById("turtle");
+
+        let redflag = document.getElementById("redflag");
+
+        function setturtleposition(x,y){
+            turtle.style.top = x + "px";
+            turtle.style.left = y + "px";
+        }
+        function setflagposition(x,y){
+            redflag.style.top = x + "px";
+            redflag.style.right = y + "px";
+        }
+
+        function createmaze(){
+            for (let x=0; x<MazeArray.length;x++){
+                let row = document.createElement("div");
+                row.classList.add("row");
+
+                for (let y=0; y<MazeArray[x].length;y++){
+                let column = document.createElement("div");
+                column.classList.add("column");
+
+                    if (MazeArray[x][y] == 0){
+                    column.classList.add("wall");
+                    }
+                    row.appendChild(column);
+
+                    if(x == 0 && y == 0){
+                        MazeArray[x][y] = 2;
+                    }
+                }
+                maze.appendChild(row);
+            }
+            setturtleposition(0,0)
+            setflagposition(0,0)
+            getturtleposition();
+        }
+
+        function getturtleposition(){
+            let position = [-1,-1];
+            for (let x=0; x<MazeArray.length;x++){
+                for (let y=0; y<MazeArray[x].length;y++){
+                    if(MazeArray[x][y] == 2){
+                        position[0] = x;
+                        position[1] = y;
+                    }
+                }
+            }
+
+            console.log(position);
+            return position;
+        }
+        
+        document.addEventListener("keydown" , function(e){
+            let turtle = document.getElementById("turtle");
+            let redflag = document.getElementById("redflag");
+            let turtleleft =  turtle.offsetLeft;
+            let turtletop = turtle.offsetTop;
+            let redflagleft = redflag.offsetLeft;
+            let redflagtop = redflag.offsetTop;
+            let turtleposition = getturtleposition();
+
+            if (e.key == "ArrowRight" && turtleleft < (MazeArray.length-1)*210 && MazeArray[turtleposition[0]][turtleposition[1] + 1] == 1){
+                    turtleleft +=210;
+                    turtle.style.left = turtleleft + "px";
+                    MazeArray[turtleposition[0]][turtleposition[1]] = 1;
+                    MazeArray[turtleposition[0]][turtleposition[1] + 1] = 2;
+                    }
+                    console.log(MazeArray);
+                
+                
+            
+            if (e.key == "ArrowLeft" && turtleleft > 0 && MazeArray[turtleposition[0]][turtleposition[1] - 1] == 1){
+                turtleleft -=210;
+                turtle.style.left = turtleleft + "px";
+                MazeArray[turtleposition[0]][turtleposition[1]] = 1;
+                MazeArray[turtleposition[0]][turtleposition[1] - 1] = 2;
+            }
+            if (e.key == "ArrowUp" && turtletop > 0 && MazeArray[turtleposition[0] - 1][turtleposition[1]] == 1){
+                turtletop -=210;
+                turtle.style.top = turtletop + "px";
+                MazeArray[turtleposition[0]][turtleposition[1]] = 1;
+                MazeArray[turtleposition[0] - 1][turtleposition[1]] = 2;
+            }
+            if (e.key == "ArrowDown" && turtletop < (MazeArray.length - 1) * 210){
+                turtletop +=210;
+                turtle.style.top = turtletop + "px";
+                MazeArray[turtleposition[0]][turtleposition[1]] = 1;
+                MazeArray[turtleposition[0] + 1][turtleposition[1]] = 2;
+            }
+
+            turtleposition = getturtleposition();
+
+if (turtleposition[0] == 0 && turtleposition[1] == 2) {
+    alert("You win!");
+}
+        });
+    </script>
+</body>
+</html>
