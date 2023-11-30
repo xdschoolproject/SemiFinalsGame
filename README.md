@@ -1,5 +1,5 @@
 # SemiFinalsGame
 
 Title: Semi-finals exam: making a game <br>
-Group Name: XD
+Group Name: XD <br>
 Group Members: John Eric Donaire, Joshua Mercado
