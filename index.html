@@ -20,9 +20,9 @@
 
     <script>
         let gamestart = [
-            [1,0,1],
-            [1,0,1],
-            [1,1,1]
+            [1,0,1,1,1,0,1],
+            [1,0,1,0,1,0,1],
+            [1,1,1,0,1,1,1]
         ]
 
         let MazeArray = gamestart;
@@ -91,7 +91,7 @@
             let redflagtop = redflag.offsetTop;
             let turtleposition = getturtleposition();
 
-            if (e.key == "ArrowRight" && turtleleft < (MazeArray.length-1)*210 && MazeArray[turtleposition[0]][turtleposition[1] + 1] == 1){
+            if (e.key == "ArrowRight" && turtleleft < (MazeArray.length-1)*1260 && MazeArray[turtleposition[0]][turtleposition[1] + 1] == 1){
                     turtleleft +=210;
                     turtle.style.left = turtleleft + "px";
                     MazeArray[turtleposition[0]][turtleposition[1]] = 1;
@@ -122,7 +122,7 @@
 
             turtleposition = getturtleposition();
 
-if (turtleposition[0] == 0 && turtleposition[1] == 2) {
+if (turtleposition[0] == 0 && turtleposition[1] == 6) {
     alert("You win!");
 }
         });
