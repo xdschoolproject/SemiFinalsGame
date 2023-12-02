@@ -113,7 +113,7 @@
                 MazeArray[turtleposition[0]][turtleposition[1]] = 1;
                 MazeArray[turtleposition[0] - 1][turtleposition[1]] = 2;
             }
-            if (e.key == "ArrowDown" && turtletop < (MazeArray.length - 1) * 210){
+            if (e.key == "ArrowDown" && turtletop < (MazeArray.length - 1) * 210 && MazeArray[turtleposition[0] + 1][turtleposition[1]] == 1){
                 turtletop +=210;
                 turtle.style.top = turtletop + "px";
                 MazeArray[turtleposition[0]][turtleposition[1]] = 1;
