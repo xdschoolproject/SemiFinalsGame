@@ -5,8 +5,8 @@
 <b>Group Members:</b> John Eric Donaire, Joshua Mercado <br>
 <b>Game Name:</b> Maze Game <br>
 
-<b>Instructions: Use arrow-keys to move the turtle</b><br>
-<i>arrow up</i>: move one position to the up <br>
-<i>arrow down</i>: move one position to the down <br>
-<i>arrow left</i>: move one position to the left <br>
-<i>arrow right</i>: move one position to the right <br>
+<b>Instructions: Use arrowkeys to move the turtle</b><br>
+<b>arrow up</b>: move one position up <br>
+<b>arrow down</b>: move one position down <br>
+<b>arrow left</b>: move one position to the left <br>
+<b>arrow right</b>: move one position to the right <br>
