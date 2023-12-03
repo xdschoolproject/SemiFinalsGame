@@ -10,7 +10,11 @@
 
 <body onload = "createmaze()">
     <h1>MAZE GAME</h1>
-    
+    <select id = "chooselevel">
+        <option value = "1">Level 1</option>
+        <option value = "2">Level 2</option>
+        <option value = "3">Level 3</option>
+    </select>
     
 
     <div id="maze-container">
@@ -19,13 +23,44 @@
     </div>
 
     <script>
-        let gamestart = [
-            [1,0,1,1,1,0,1],
-            [1,0,1,0,1,0,1],
-            [1,1,1,0,1,1,1]
+        let level1 = [
+            [1,0,1],
+            [1,0,1],
+            [1,1,1]
         ]
 
-        let MazeArray = gamestart;
+        let level2 = [
+            [1,0,0,0,1],
+            [1,1,0,1,1],
+            [0,1,1,1,0]
+        ]
+
+        let level3 = [
+            [1,1,0,1,1,0,1],
+            [0,1,1,1,0,0,1],
+            [1,1,0,1,1,1,1]
+        ]
+
+        let MazeArray = level1;
+
+        let Level = document.getElementById("chooselevel");
+
+        Level.addEventListener("change", function(){
+            let level = Level.value;
+            console.log(level);
+            if(level==1){
+                MazeArray = level1;
+            }
+            else if(level==2){
+                MazeArray = level2;
+            }
+            else if(level==3){
+                MazeArray = level3;
+            }
+            maze.innerHTML=`<img src="turtle.png" id="turtle" width="50px" height="50px" alt="turtle">
+            <img src="redflag.png" id="redflag" width="50px" height="50px" alt="redflag">`
+            createmaze();
+        })
 
         let maze = document.getElementById("maze-container");
 
@@ -43,6 +78,7 @@
         }
 
         function createmaze(){
+            
             for (let x=0; x<MazeArray.length;x++){
                 let row = document.createElement("div");
                 row.classList.add("row");
@@ -91,6 +127,10 @@
             let redflagtop = redflag.offsetTop;
             let turtleposition = getturtleposition();
 
+            if (e.key.includes("Arrow")) {
+        
+        e.preventDefault();
+
             if (e.key == "ArrowRight" && turtleleft < (MazeArray.length-1)*1260 && MazeArray[turtleposition[0]][turtleposition[1] + 1] == 1){
                     turtleleft +=210;
                     turtle.style.left = turtleleft + "px";
@@ -113,18 +153,21 @@
                 MazeArray[turtleposition[0]][turtleposition[1]] = 1;
                 MazeArray[turtleposition[0] - 1][turtleposition[1]] = 2;
             }
-            if (e.key == "ArrowDown" && turtletop < (MazeArray.length - 1) * 210 && MazeArray[turtleposition[0] + 1][turtleposition[1]] == 1){
-                turtletop +=210;
+            if (e.key == "ArrowDown" && turtletop < (MazeArray.length - 1) * 210) {
+                 if (MazeArray[turtleposition[0] + 1][turtleposition[1]] == 1) {
+                turtletop += 210;
                 turtle.style.top = turtletop + "px";
                 MazeArray[turtleposition[0]][turtleposition[1]] = 1;
                 MazeArray[turtleposition[0] + 1][turtleposition[1]] = 2;
-            }
+                }
+             }
 
             turtleposition = getturtleposition();
 
-if (turtleposition[0] == 0 && turtleposition[1] == 6) {
+            if (turtleposition[0] == 0 && turtleposition[1] == MazeArray[turtleposition[0]].length - 1) {
     alert("You win!");
 }
+    }
         });
     </script>
 </body>
